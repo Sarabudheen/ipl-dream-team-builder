@@ -1,0 +1,72 @@
+<div class="spin-wheel-container">
+  <div class="wheel-wrapper">
+    <div class="pointer"></div>
+    <canvas #wheelCanvas class="wheel-canvas"></canvas>
+  </div>
+  
+  <button 
+    class="spin-button" 
+    (click)="spinWheel()" 
+    [disabled]="isSpinning"
+    [class.spinning]="isSpinning">
+    {{ isSpinning ? 'SPINNING...' : 'SPIN THE WHEEL' }}
+  </button>
+</div>
+
+<!-- PrimeNG Dialog for Players Popup -->
+<p-dialog 
+  [(visible)]="displayModal" 
+  [header]="selectedTeam?.name" 
+  [modal]="true" 
+  [style]="{ width: '90vw', maxWidth: '800px' }"
+  [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+  [draggable]="false"
+  [resizable]="false">
+  
+  <div *ngIf="selectedTeam && selectedTeamSquad" class="players-modal-content">
+    <!-- Team Header -->
+    <div class="team-header" [style.backgroundColor]="selectedTeam.color" [style.color]="selectedTeam.textColor">
+      <h2>{{ selectedTeam.abbr }}</h2>
+      <p>{{ selectedTeam.name }} Squad</p>
+    </div>
+
+    <!-- Players by Role -->
+    <div class="players-container">
+      <!-- Batters -->
+      <div class="player-category" *ngIf="selectedTeamSquad.batters && selectedTeamSquad.batters.length > 0">
+        <h3 class="category-title">🏏 Batters ({{ selectedTeamSquad.batters.length }})</h3>
+        <div class="players-grid">
+          <div class="player-card" *ngFor="let player of selectedTeamSquad.batters">
+            <div class="player-name">{{ player.name }}</div>
+            <div class="player-country">{{ player.country }}</div>
+            <div class="player-role">{{ player.role }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- All-Rounders -->
+      <div class="player-category" *ngIf="selectedTeamSquad.allRounders && selectedTeamSquad.allRounders.length > 0">
+        <h3 class="category-title">🎯 All-Rounders ({{ selectedTeamSquad.allRounders.length }})</h3>
+        <div class="players-grid">
+          <div class="player-card" *ngFor="let player of selectedTeamSquad.allRounders">
+            <div class="player-name">{{ player.name }}</div>
+            <div class="player-country">{{ player.country }}</div>
+            <div class="player-role">{{ player.role }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bowlers -->
+      <div class="player-category" *ngIf="selectedTeamSquad.bowlers && selectedTeamSquad.bowlers.length > 0">
+        <h3 class="category-title">🎳 Bowlers ({{ selectedTeamSquad.bowlers.length }})</h3>
+        <div class="players-grid">
+          <div class="player-card" *ngFor="let player of selectedTeamSquad.bowlers">
+            <div class="player-name">{{ player.name }}</div>
+            <div class="player-country">{{ player.country }}</div>
+            <div class="player-role">{{ player.role }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</p-dialog>

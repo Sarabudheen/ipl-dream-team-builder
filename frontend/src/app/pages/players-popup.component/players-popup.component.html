@@ -1,0 +1,65 @@
+<div class="players-popup-container" *ngIf="selectedTeam && selectedTeamSquad">
+  <div class="popup-header" [style.backgroundColor]="selectedTeam.color">
+    <h2>{{ selectedTeam.name }}</h2>
+    <p class="team-abbr">{{ selectedTeam.abbr }}</p>
+  </div>
+
+  <div class="players-content">
+    <!-- Batters Section -->
+    <div class="player-category" *ngIf="selectedTeamSquad.batters && selectedTeamSquad.batters.length">
+      <div class="category-header">
+        <h3>🏏 Batters</h3>
+        <span class="player-count">{{ selectedTeamSquad.batters.length }}</span>
+      </div>
+      <div class="players-grid">
+        <div
+          class="player-card"
+          *ngFor="let player of selectedTeamSquad.batters"
+          [style.borderTopColor]="selectedTeam.color"
+        >
+          <div class="player-name">{{ player.name }}</div>
+          <div class="player-country">{{ player.country }}</div>
+          <div class="player-role">{{ player.role }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- All-Rounders Section -->
+    <div class="player-category" *ngIf="selectedTeamSquad.allRounders && selectedTeamSquad.allRounders.length">
+      <div class="category-header">
+        <h3>⚡ All-Rounders</h3>
+        <span class="player-count">{{ selectedTeamSquad.allRounders.length }}</span>
+      </div>
+      <div class="players-grid">
+        <div
+          class="player-card"
+          *ngFor="let player of selectedTeamSquad.allRounders"
+          [style.borderTopColor]="selectedTeam.color"
+        >
+          <div class="player-name">{{ player.name }}</div>
+          <div class="player-country">{{ player.country }}</div>
+          <div class="player-role">{{ player.role }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bowlers Section -->
+    <div class="player-category" *ngIf="selectedTeamSquad.bowlers && selectedTeamSquad.bowlers.length">
+      <div class="category-header">
+        <h3>🎯 Bowlers</h3>
+        <span class="player-count">{{ selectedTeamSquad.bowlers.length }}</span>
+      </div>
+      <div class="players-grid">
+        <div
+          class="player-card"
+          *ngFor="let player of selectedTeamSquad.bowlers"
+          [style.borderTopColor]="selectedTeam.color"
+        >
+          <div class="player-name">{{ player.name }}</div>
+          <div class="player-country">{{ player.country }}</div>
+          <div class="player-role">{{ player.role }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
